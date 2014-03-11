@@ -27,15 +27,19 @@ module.exports = function(grunt) {
       });
 
       if( !options.remote ) {
-        var paths = [];
-        paths.push(options.path);
-        options.path = paths;
+
+        if( !Array.isArray( options.path ) ) {
+          var paths = [];
+          paths.push(options.path);
+          delete options.path;
+          options.path = paths;
+        }
+
         grunt.log.writeln('Using local path.');
       } else {
+        delete options.path;
         grunt.log.writeln('Using remote location.');
       }
-
-      delete options.path;
 
       var done = this.async();
 
