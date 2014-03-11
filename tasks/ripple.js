@@ -19,16 +19,20 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('ripple', 'Grunt task for the ripple emulator for Cordova/PhoneGap projects.', function() {
       // Merge task-specific and/or target-specific options with these defaults.
       var options = this.options({
+          remote: false,
           path: 'www',
           keepAlive: false,
           open: true,
           port: 4400
       });
 
-      var paths = [];
-      paths.push(options.path);
+      if( !options.remote ) {
+        var paths = [];
+        paths.push(options.path);
+        options.path = paths;
+      }
+
       delete options.path;
-      options.path = paths;
 
       var done = this.async();
 
