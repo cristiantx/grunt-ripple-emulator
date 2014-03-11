@@ -30,6 +30,9 @@ module.exports = function(grunt) {
         var paths = [];
         paths.push(options.path);
         options.path = paths;
+        grunt.log.writeln('Using local path.');
+      } else {
+        grunt.log.writeln('Using remote location.');
       }
 
       delete options.path;
